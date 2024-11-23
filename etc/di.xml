@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Visus\CustomerTfa\Api\CustomerTfaRepositoryInterface"
+                type="Visus\CustomerTfa\Model\CustomerTfaRepository" />
+    <preference for="Visus\CustomerTfa\Api\Data\CustomerTfaInterface"
+                type="Visus\CustomerTfa\Model\CustomerTfa" />
+    <preference for="Visus\CustomerTfa\Api\Data\CustomerTfaSearchResultInterface"
+                type="Visus\CustomerTfa\Model\CustomerTfaSearchResult" />
+    <preference for="Visus\CustomerTfa\Api\Service\CustomerTfaServiceInterface"
+                type="Visus\CustomerTfa\Service\CustomerTfaService" />
+    <preference for="Visus\CustomerTfa\Api\CustomerTfaSessionInterface"
+                type="Visus\CustomerTfa\Model\CustomerTfaSession" />
+
+    <preference for="Visus\CustomerTfa\Api\CustomerTfaChallengeRepositoryInterface"
+                type="Visus\CustomerTfa\Model\CustomerTfaChallengeRepository" />
+    <preference for="Visus\CustomerTfa\Api\Data\CustomerTfaChallengeInterface"
+                type="Visus\CustomerTfa\Model\CustomerTfaChallenge" />
+    <preference for="Visus\CustomerTfa\Api\Data\CustomerTfaChallengeSearchResultInterface"
+                type="Visus\CustomerTfa\Model\CustomerTfaChallengeSearchResult" />
+    <preference for="Visus\CustomerTfa\Api\Service\CustomerTfaChallengeServiceInterface"
+                type="Visus\CustomerTfa\Service\CustomerTfaChallengeService" />
+
+    <preference for="Visus\CustomerTfa\Api\Service\CustomerNonceServiceInterface"
+                type="Visus\CustomerTfa\Service\CustomerNonceService" />
+
+    <type name="Magento\Customer\Model\AccountManagement">
+        <plugin name="Visus_CustomerTfa_Plugin_Magento_Customer_Model_AccountManagement"
+                type="Visus\CustomerTfa\Plugin\Magento\Customer\Model\AccountManagement"
+                sortOrder="1" />
+    </type>
+
+</config>

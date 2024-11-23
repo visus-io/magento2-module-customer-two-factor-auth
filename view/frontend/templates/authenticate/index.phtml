@@ -1,0 +1,30 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\Escaper;
+use Visus\CustomerTfa\Block\Customer\Authenticate;
+
+/** @var Authenticate $block */
+/** @var Escaper $escaper */
+?>
+<form class="form" action="<?= /** @noEscape **/ $block->getUrl('visus_tfa/authenticate/validate') ?>" method="post" id="one-time-password-form" data-hasrequired="<?= /** @noEscape */ __('* Required fields') ?>">
+    <input type="hidden" name="form_key" value="<?= /** @noEscape */ $block->getFormKey() ?>"/>
+    <fieldset class="fieldset">
+        <div class="field one-time-password required">
+            <label for="one-time-password-input" class="label">
+                <span><?= /** @noEscape */ __('Authentication Code') ?></span>
+            </label>
+            <input aria-required="true"
+                   autocomplete="off"
+                   id="one-time-password-input"
+                   required="required"
+                   maxlength="6"
+                   minlength="6"
+                   spellcheck="false"
+                   type="number"
+                   name="one-time-password"/>
+        </div>
+    </fieldset>
+    <button class="primary action" type="submit"><?= /** @noEscape */ __('Submit') ?></button>
+    <button class="secondary action" type="button"><?= /** @noEscape */ __('Use Recovery Code') ?></button>
+</form>

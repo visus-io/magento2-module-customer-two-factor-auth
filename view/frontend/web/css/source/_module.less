@@ -1,0 +1,27 @@
+& when (@media-common = true) {
+    .modal-popup {
+        &.vs-tfa__modal {
+            .modal-inner-wrap {
+                max-width: 800px;
+            }
+
+            .modal-title {
+                border-bottom: none;
+            }
+        }
+    }
+
+    ul.recovery-codes {
+        columns: 2;
+        -webkit-columns: 2;
+        -moz-columns: 2;
+    }
+
+    legend {
+        &.title {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            margin-left: -0.2rem;
+        }
+    }
+}

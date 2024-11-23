@@ -1,0 +1,50 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Magento\Framework\View\Helper\SecureHtmlRenderer;
+use Visus\CustomerTfa\ViewModel\Customer\TfaViewModel;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+/** @var TfaViewModel $viewModel */
+/** @var SecureHtmlRenderer $secureRenderer */
+
+$viewModel = $block->getData('view_model');
+$isEnrolled = $viewModel->isEnrolled();
+?>
+<p>
+    <?= /** @noEscape */ __('Status') ?>:
+    <?php if ($isEnrolled): ?>
+        <strong><?= /** @noEscape */ __('Enabled') ?></strong>
+    <?php else: ?>
+        <strong><?= /** @noEscape */ __('Disabled') ?></strong>
+    <?php endif; ?>
+</p>
+<p>
+    <?php if ($isEnrolled): ?>
+    <button type="button" id="disable-tfa" class="action primary">
+        <span><?= /** @noEscape */ __('Disable') ?></span>
+    </button>
+    <?php else: ?>
+    <button type="button" id="enable-tfa" class="action primary">
+        <span><?= /** @noEscape */ __('Enable') ?></span>
+    </button>
+    <?php endif; ?>
+</p>
+<?php
+$scriptString = <<<script
+    window.vsCustomerTfa = {'nonceValidationCookieName': "{$viewModel->getNonceValidationCookieName()}"};
+script;
+?>
+<?= /** @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>
+<script type="text/x-magento-init">
+    {
+        "*": {
+          "Visus_CustomerTfa/js/two-factor-auth": { "enabled": <?= /** @noEscape */ $isEnrolled ? 'true' : 'false'; ?> }
+        }
+    }
+</script>
+<?= $block->getChildBlock('visus.tfa.main.challenge') ?>
+<?= $block->getChildBlock('visus.tfa.main.synchronize') ?>

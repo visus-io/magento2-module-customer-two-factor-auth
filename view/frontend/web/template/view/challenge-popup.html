@@ -1,0 +1,28 @@
+<div class="block-tfa" data-bind="afterRender: setModalElement, blockLoader: isLoading" style="display: none">
+    <!-- ko foreach: getRegion('messages') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    <!-- /ko -->
+    <div class="block-content">
+        <form class="form" method="post" data-bind="event: {submit: onSubmit }" id="verify-challenge-form">
+            <fieldset class="fieldset" data-bind="attr: {'data-hasrequired': $t('* Required fields')}">
+                <legend class="title" data-bind="i18n: 'Please enter your verification code'"></legend>
+                <div class="field challenge required">
+                    <label for="challenge-input" class="label">
+                        <span data-bind="i18n: 'Verification Code'">&nbsp;</span>
+                    </label>
+                    <div class="control">
+                        <input aria-required="true"
+                               autocomplete="off"
+                               id="challenge-input"
+                               required="required"
+                               maxlength="6"
+                               minlength="6"
+                               spellcheck="false"
+                               type="number"
+                               name="challenge" />
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

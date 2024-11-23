@@ -1,0 +1,26 @@
+<div class="block-tfa" data-bind="afterRender: setModalElement, blockLoader: isLoading" style="display: none">
+    <!-- ko foreach: getRegion('messages') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    <!-- /ko -->
+    <div class="block-content container">
+        <img data-bind="attr: {src: settings.qrCode(), alt: $t('qr code')}" width="200" height="200" />
+        <form class="form" method="post" data-bind="event: {submit: onSubmit }" id="verify-code-form">
+            <fieldset class="fieldset" data-bind="attr: {'data-hasrequired': $t('* Required fields')}">
+                <label for="one-time-password-input" class="label">
+                    <span data-bind="i18n: 'Authentication Code'">&nbsp;</span>
+                </label>
+                <div class="control">
+                    <input aria-required="true"
+                           autocomplete="off"
+                           id="one-time-password-input"
+                           required="required"
+                           maxlength="6"
+                           minlength="6"
+                           spellcheck="false"
+                           type="number"
+                           name="one-time-password" />
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

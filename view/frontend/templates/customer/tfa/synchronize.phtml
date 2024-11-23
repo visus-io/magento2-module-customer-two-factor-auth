@@ -1,0 +1,29 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Magento\Framework\View\Helper\SecureHtmlRenderer;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+/** @var SecureHtmlRenderer $secureRenderer */
+
+?>
+<div id="vsTfaSynchronize" data-bind="scope:'vsTfaSynchronize'" style="display: none">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <?php
+    $script = <<<EOT
+        {
+            "#vsTfaSynchronize": {
+                "Magento_Ui/js/core/app": {$block->getJsLayout()}
+        },
+        "*": {
+            "Magento_Ui/js/block-loader": "{$escaper->escapeJs($escaper->escapeUrl($block->getViewFileUrl("images/loader-1.gif")))}"
+            }
+        }
+EOT;
+
+    ?>
+    <?= $secureRenderer->renderTag('script', ['type' => 'text/x-magento-init'], $script, false) ?>
+</div>

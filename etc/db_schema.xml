@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="visus_customer_tfa" resource="default" engine="innodb" comment="Customer TFA Entity">
+        <column xsi:type="int" name="customer_id" unsigned="true" nullable="false" />
+        <column xsi:type="text" name="secret" nullable="false" />
+        <column xsi:type="text" name="recovery_codes" nullable="true" />
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" />
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="customer_id" />
+        </constraint>
+        <constraint xsi:type="foreign"
+                    referenceId="VISUS_CUSTOMER_TFA_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID"
+                    table="visus_customer_tfa"
+                    column="customer_id"
+                    referenceTable="customer_entity"
+                    referenceColumn="entity_id"
+                    onDelete="CASCADE" />
+        <index referenceId="VISUS_CUSTOMER_TFA_CREATED_AT" indexType="btree">
+            <column name="created_at" />
+        </index>
+        <index referenceId="VISUS_CUSTOMER_TFA_UPDATED_AT" indexType="btree">
+            <column name="updated_at" />
+        </index>
+    </table>
+    <table name="visus_customer_tfa_challenge" resource="default" engine="innodb" comment="Customer TFA Challenge Entity">
+        <column xsi:type="int" name="customer_id" unsigned="true" nullable="false" identity="false" />
+        <column xsi:type="text" name="challenge" nullable="false" />
+        <column xsi:type="timestamp" name="expires_at" on_update="false" nullable="false" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="customer_id" />
+        </constraint>
+        <constraint xsi:type="foreign"
+                    referenceId="VISUS_CUSTOMER_TFA_CHALLENGE_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID"
+                    table="visus_customer_tfa_challenge"
+                    column="customer_id"
+                    referenceTable="customer_entity"
+                    referenceColumn="entity_id"
+                    onDelete="CASCADE" />
+        <index referenceId="VISUS_CUSTOMER_TFA_CHALLENGE_EXPIRES_AT" indexType="btree">
+            <column name="expires_at" />
+        </index>
+    </table>
+</schema>

@@ -1,0 +1,17 @@
+<!--@subject {{trans "%store_name Verification Code" store_name=$store.frontend_name}} @-->
+<!--@vars {
+"var store.frontend_name":"Store Name"
+"var customer.name":"Customer Name"
+"var challenge":"Challenge Code"
+
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<p class="greeting">{{trans "%name," name=$customer.name}}</p>
+<p><strong>{{trans "Here is your one-time verification code."}}</strong></p>
+<p>{{trans "We will never call to ask for this code. Do not share it with anyone calling you directly."}}</p>
+<p>{{trans "Enter this 6-digit code to confirm your action:"}}</p>
+<p><strong>{{var challenge}}</strong></p>
+<p>{{trans 'If you did not make this request, please <a href="mailto:%support_email">contact us</a>.' support_email=$support_email | raw}}</p>
+{{template config_path="design/email/footer_template"}}

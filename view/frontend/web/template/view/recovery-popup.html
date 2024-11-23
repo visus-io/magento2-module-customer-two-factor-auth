@@ -1,0 +1,22 @@
+<div class="block-tfa" data-bind="afterRender: setModalElement, blockLoader: isLoading" style="display: none">
+    <!-- ko foreach: getRegion('messages') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    <!-- /ko -->
+
+    <div class="block-content container">
+        <p data-bind="i18n: 'Recovery codes can be used to access your account in the event you lose access to your device and cannot generate a two-factor authentication code. Each recovery code is one-time use only.'"></p>
+        <ul class="recovery-codes" data-bind="foreach: settings.recoveryCodes()">
+            <li data-bind="text: $data"></li>
+        </ul>
+        <button type="button" data-bind="i18n: 'Copy', click: copyCodes"></button>
+        <button type="button" data-bind="i18n: 'Download', click: downloadCodes"></button>
+        <button type="button" data-bind="i18n: 'Print', click: printCodes"></button>
+        <br><br>
+        <input aria-labelledby="label-checkbox-confirmed-saved-recovery-codes"
+               type="checkbox"
+               id="input-checkbox-confirmed-saved-recovery-codes"/>
+        <label id="label-checkbox-confirmed-saved-recovery-codes"
+               for="input-checkbox-confirmed-saved-recovery-codes"
+               data-bind="i18n: 'I have saved the recovery codes'"></label>
+    </div>
+</div>
